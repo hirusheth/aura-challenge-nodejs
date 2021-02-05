@@ -88,3 +88,91 @@ After you submit the completed project, we will schedule a follow-up code-review
 | :------------------- | :--------------------------- |
 | `npm run format:fix` | format files with "prettier" |
 | `npm run test`       | execute tests with "jest"    |
+
+## Solution
+
+1. Implemented API for search zip codes.
+2. Considered zip code and city name as a AND clause to search
+3. Considered search by nearest lat long to return sorted array based on distance
+4. Considered filter by additional attributes to be search by OR clause `type`, `state`, `county`, `area_codes`, `country`
+5. Added basic test cases to verify the implementation
+
+## Possible Events
+
+1. Search by full or partial zipcode
+
+```json
+{
+  "httpMethod": "POST",
+  "path": "/resouce",
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": "{\"zip\":\"0100\"}"
+}
+```
+
+2. Search by full or Partial city name
+
+```json
+{
+  "httpMethod": "POST",
+  "path": "/resouce",
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": "{\"city\":\"West Boxford\"}"
+}
+```
+
+3. search by closest latitude/longitude
+
+```json
+{
+  "httpMethod": "POST",
+  "path": "/resouce",
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": "{\"latitude\":\"42.06\", \"longitude\":\"-72.61\"}"
+}
+```
+
+4. filter by additional attributes
+
+```json
+{
+  "httpMethod": "POST",
+  "path": "/resouce",
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": "{\"search\":\"Essex County\"}"
+}
+```
+
+5. Search by City AND ZIP code
+
+```json
+{
+  "httpMethod": "POST",
+  "path": "/resouce",
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": "{\"zip\":\"0100\", \"city\":\"Amherst\"}"
+}
+```
+
+5. Search by City AND ZIP code And Nearest
+
+```json
+{
+  "httpMethod": "POST",
+  "path": "/resouce",
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": "{\"zip\":\"0100\", \"city\":\"a\", \"latitude\": \"42.06\", \"longitude\": \"-72.61\"}"
+}
+```
